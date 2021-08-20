@@ -11,6 +11,7 @@ env:
 
 jobs:
   buildHelloWorld:
+    name: "Build & Test: Hello World"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,6 +21,7 @@ jobs:
         run: cargo test --manifest-path=hello/Cargo.toml --verbose
 
   buildBasics:
+    name: "Build & Test: Basics"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
