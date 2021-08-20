@@ -1,6 +1,8 @@
 fn main() {
     scoping();
     shadowing();
+    make_immutable_using_shadowing();
+    changing_data_type_like_in_data_transformation_pipelines();
 }
 
 fn scoping() {
@@ -25,3 +27,20 @@ fn shadowing() {
     println!("{}", x) // Prints "5"
 }
 
+fn make_immutable_using_shadowing() {
+    let mut x = 0; // x is mutable
+
+    // This line of code often does not even show up in the assembly code,
+    // depending on the compilers optimisation path.
+    let x = x; // x is now immutable
+}
+
+fn changing_data_type_like_in_data_transformation_pipelines() -> usize {
+    let changing_type = "StartAsAString";
+
+    // As the intermediate variable (the string) is never exposed, so changing its type might be 
+    // useful for specific cases like data transformation pipes.
+    let changing_type = changing_type.len();
+
+    return changing_type;
+}
