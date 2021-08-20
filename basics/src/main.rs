@@ -1,8 +1,11 @@
+mod variables;
+
 fn main() {
     scoping();
     shadowing();
     make_immutable_using_shadowing();
     changing_data_type_like_in_data_transformation_pipelines();
+    variables::main();
 }
 
 fn scoping() {
@@ -27,6 +30,7 @@ fn shadowing() {
     println!("{}", x) // Prints "5"
 }
 
+#[allow(unused_variables, unused_mut)]
 fn make_immutable_using_shadowing() {
     let mut x = 0; // x is mutable
 
