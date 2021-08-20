@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  buildHelloWorld:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,3 +18,12 @@ jobs:
         run: cargo build --manifest-path=hello/Cargo.toml --verbose
       - name: Run tests
         run: cargo test --manifest-path=hello/Cargo.toml --verbose
+
+  buildBasics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: cargo build --manifest-path=basics/Cargo.toml --verbose
+      - name: Run tests
+        run: cargo test --manifest-path=basics/Cargo.toml --verbose
