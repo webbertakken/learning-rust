@@ -1,5 +1,7 @@
 mod basic_concepts;
+mod compound_types;
 mod functions;
+mod scalar_types;
 mod simple_types;
 mod variables;
 
@@ -8,4 +10,6 @@ fn main() {
     variables::main();
     functions::main();
     simple_types::main();
+    scalar_types::main();
+    compound_types::main();
 }
