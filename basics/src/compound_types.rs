@@ -2,6 +2,7 @@
 #![allow(unused_variables)]
 
 pub fn main() {
+    println!("\ncompound types...");
     tuples();
     arrays();
 }

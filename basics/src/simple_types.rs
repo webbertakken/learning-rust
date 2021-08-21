@@ -1,7 +1,7 @@
 ﻿// Silence some warnings so they don't distract from the exercise.
 #![allow(unused_variables)]
 
-use basics::print_difference;
+use basics::{print_array, print_difference};
 
 pub fn main() {
     println!("\nsimple types...");
@@ -23,10 +23,6 @@ fn use_some_simple_types() {
     on_off(mess.2[1].0);
 
     print_distance(coords);
-}
-
-fn print_array(a: [f32; 2]) {
-    println!("The coordinates are ({}, {})", a[0], a[1]);
 }
 
 fn ding(x: i32) {

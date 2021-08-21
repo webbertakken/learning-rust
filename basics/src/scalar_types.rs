@@ -2,6 +2,8 @@
 #![allow(unused_variables)]
 
 pub fn main() {
+    println!("\nscalar types...");
+
     integers();
     floats();
     booleans();
