@@ -4,6 +4,8 @@ Nothing much to see here, just me learning Rust :)
 
 Each folder contains a Rust project.
 
+![Build & Test](https://github.com/webbertakken/learning-rust/actions/workflows/main.yml/badge.svg)
+
 ## Usage
 
 ### Prerequisites
