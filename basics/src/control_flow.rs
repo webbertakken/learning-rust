@@ -6,6 +6,10 @@ pub fn main() {
     exercise();
     variable_from_result_of_if_statement();
     breaking_out_of_nested_loops_using_labels();
+    a_while_using_another_function_as_a_condition();
+    a_for_loop_using_an_iterable();
+    a_for_loop_using_a_range();
+    a_for_loop_destructuring_tuples_in_an_array();
 }
 
 fn exercise() {
@@ -107,4 +111,45 @@ fn breaking_out_of_nested_loops_using_labels() {
         "Inner loop was {}reached",
         if innermost_loop_reached { "" } else { "not " }
     )
+}
+
+fn a_while_using_another_function_as_a_condition() {
+    let mut energy: i32 = 0;
+
+    fn tired(energy: i32) -> bool {
+        return energy <= 6;
+    }
+
+    fn rest(energy: i32) -> i32 {
+        return energy + 1;
+    }
+
+    while tired(energy) {
+        energy = rest(energy);
+    }
+}
+
+fn a_for_loop_using_an_iterable() {
+    for number in [1, 2, 3].iter() {
+        print!("{}, ", number);
+    }
+
+    println!();
+}
+
+fn a_for_loop_using_a_range() {
+    // The equals sign is for inclusive range
+    for number in 1..=10 {
+        print!("{}, ", number);
+    }
+
+    println!();
+}
+
+fn a_for_loop_destructuring_tuples_in_an_array() {
+    for (a, b) in [(1, 2), (3, 4)].iter() {
+        print!("{} and {}, ", a, b);
+    }
+
+    println!();
 }
