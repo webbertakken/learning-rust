@@ -1,17 +1,19 @@
-mod basic_concepts;
-mod compound_types;
-mod control_flow;
-mod functions;
-mod scalar_types;
-mod simple_types;
-mod variables;
+mod a_basic_concepts;
+mod b_variables;
+mod c_functions;
+mod d_simple_types;
+mod e_scalar_types;
+mod f_compound_types;
+mod g_control_flow;
+mod h_strings;
 
 fn main() {
-    basic_concepts::main();
-    variables::main();
-    functions::main();
-    simple_types::main();
-    scalar_types::main();
-    compound_types::main();
-    control_flow::main();
+    a_basic_concepts::main();
+    b_variables::main();
+    c_functions::main();
+    d_simple_types::main();
+    e_scalar_types::main();
+    f_compound_types::main();
+    g_control_flow::main();
+    h_strings::main();
 }
