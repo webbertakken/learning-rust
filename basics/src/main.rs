@@ -6,6 +6,7 @@ mod e_scalar_types;
 mod f_compound_types;
 mod g_control_flow;
 mod h_strings;
+mod i_ownership;
 
 fn main() {
     a_basic_concepts::main();
@@ -16,4 +17,5 @@ fn main() {
     f_compound_types::main();
     g_control_flow::main();
     h_strings::main();
+    i_ownership::main();
 }
