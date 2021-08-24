@@ -38,17 +38,8 @@ fn exercise() {
 fn sum() {
     let mut sum = 0;
 
-    let min = 7;
-    let max = 23;
-
-    let mut current = min;
-    loop {
-        if current > max {
-            break;
-        }
-
+    for current in 7..=23 {
         sum += current;
-        current += 1;
     }
 
     println!("The sum is {}", sum);
