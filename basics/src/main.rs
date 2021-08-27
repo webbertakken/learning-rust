@@ -10,6 +10,7 @@ mod i_ownership;
 mod j_structs;
 mod k_traits;
 mod l_collections;
+mod m_enums;
 
 fn main() {
     a_basic_concepts::main();
@@ -24,4 +25,5 @@ fn main() {
     j_structs::main();
     k_traits::main();
     l_collections::main();
+    m_enums::main();
 }
