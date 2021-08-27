@@ -3,6 +3,7 @@
 Nothing much to see here, just me learning Rust :)
 
 Each folder contains a Rust project.
+The basics folder contains examples of most of the language's basics.
 
 ![Build & Test](https://github.com/webbertakken/learning-rust/actions/workflows/main.yml/badge.svg)
 
@@ -17,14 +18,14 @@ Each folder contains a Rust project.
 Usage example
 
 ```ps
-cd hello
+cd basics
 cargo run
 ```
 
 Alternatively, to run from the root directory
 
 ```ps
-cargo run --manifest-path=hello/Cargo.toml
+cargo run --manifest-path=basics/Cargo.toml
 ``` 
 
 ### Watch
@@ -32,14 +33,14 @@ cargo run --manifest-path=hello/Cargo.toml
 Usage example
 
 ```ps
-cd hello
+cd basics
 cargo watch -x run
 ```
 
 Alternatively, to run from the root directory
 
 ```
-cargo watch -x 'run -- --manifest-path=hello/Cargo.toml'
+cargo watch -x 'run -- --manifest-path=basics/Cargo.toml'
 ```
 
 ## License
