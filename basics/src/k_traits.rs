@@ -65,8 +65,6 @@ where
     // Do stuff
 }
 
-// when traits
-
 pub fn main() {
     println!("\ntraits...");
 
