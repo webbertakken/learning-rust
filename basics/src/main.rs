@@ -7,6 +7,7 @@ mod f_compound_types;
 mod g_control_flow;
 mod h_strings;
 mod i_ownership;
+mod j_structs;
 
 fn main() {
     a_basic_concepts::main();
@@ -18,4 +19,5 @@ fn main() {
     g_control_flow::main();
     h_strings::main();
     i_ownership::main();
+    j_structs::main();
 }

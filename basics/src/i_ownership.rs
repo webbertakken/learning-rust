@@ -15,7 +15,7 @@ fn move_value_to_new_pointer() {
     //  -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
 
     let s2 = s1;
-    //             -- value moved here
+    //             -- value moved here (s1 no longer points to the value)
 
     // println!("{}", s1);
     // Error:         ^^ value borrowed here after move
