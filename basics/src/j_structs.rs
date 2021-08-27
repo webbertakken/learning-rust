@@ -1,7 +1,9 @@
 // Silence some warnings so they don't distract from the exercise.
-#![allow(unused_variables)]
+#![allow(unused_variables, dead_code)]
 
 pub fn main() {
+    println!("\nstructs and implementations...");
+
     basic_struct();
 }
 
@@ -32,8 +34,9 @@ fn basic_struct() {
         }
 
         // methods
-        fn walk(self) {
+        fn make_a_sound(self) {
             // do something
+            println!("RedFox: Alarm bark!")
         }
 
         fn borrow(&self) {
@@ -51,6 +54,5 @@ fn basic_struct() {
     let life = fox.life;
 
     fox.enemy = false;
-    fox.walk();
+    fox.make_a_sound();
 }
-

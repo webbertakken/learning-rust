@@ -8,6 +8,7 @@ mod g_control_flow;
 mod h_strings;
 mod i_ownership;
 mod j_structs;
+mod k_traits;
 
 fn main() {
     a_basic_concepts::main();
@@ -20,4 +21,5 @@ fn main() {
     h_strings::main();
     i_ownership::main();
     j_structs::main();
+    k_traits::main();
 }

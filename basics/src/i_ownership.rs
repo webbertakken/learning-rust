@@ -2,6 +2,8 @@
 #![allow(unused_variables)]
 
 pub fn main() {
+    println!("\nownership...");
+
     move_value_to_new_pointer();
     copy_value_to_new_pointer();
     changing_values_prevention_in_side_effects();

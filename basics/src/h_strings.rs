@@ -25,6 +25,9 @@ fn get_nth_character() {
 
     let third_character = string_of_characters.chars().nth(2).unwrap();
 
-    println!("{} is the third character in {}", third_character, string_of_characters);
+    println!(
+        "{} is the third character in {}",
+        third_character, string_of_characters
+    );
     // prints "r is the third character in hørses"
 }
