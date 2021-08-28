@@ -11,6 +11,7 @@ mod j_structs;
 mod k_traits;
 mod l_collections;
 mod m_enums;
+mod n_closures;
 
 fn main() {
     a_basic_concepts::main();
@@ -26,4 +27,5 @@ fn main() {
     k_traits::main();
     l_collections::main();
     m_enums::main();
+    n_closures::main();
 }
