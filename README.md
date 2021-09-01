@@ -17,14 +17,14 @@ The basics folder contains examples of most of the language's basics.
 
 Usage example
 
-```ps
+```shell
 cd basics
 cargo run
 ```
 
 Alternatively, to run from the root directory
 
-```ps
+```shell
 cargo run --manifest-path=basics/Cargo.toml
 ``` 
 
@@ -32,15 +32,23 @@ cargo run --manifest-path=basics/Cargo.toml
 
 Usage example
 
-```ps
+```shell
 cd basics
 cargo watch -x run
 ```
 
 Alternatively, to run from the root directory
 
-```
+```shell
 cargo watch -x 'run -- --manifest-path=basics/Cargo.toml'
+```
+
+Example usage for image processing
+
+```shell
+cd image-processing
+cargo watch --ignore output -x 'run -- -v --blur .5 --fractal im
+ages/pens.png output/pens.png'
 ```
 
 ## License
