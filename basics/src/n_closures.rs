@@ -20,7 +20,7 @@ fn syntax() {
 }
 
 fn usage_with_iterators() {
-    let mut vector = vec![1, 2, 3, 5];
+    let vector = vec![1, 2, 3, 5];
 
     let result = vector
         .iter()
