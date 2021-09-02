@@ -4,10 +4,11 @@ use crossterm::event::{Event, KeyCode};
 use crossterm::terminal::{EnterAlternateScreen, LeaveAlternateScreen};
 use crossterm::{event, terminal, ExecutableCommand};
 use rusty_audio::Audio;
-use space_invaders::frame::new_frame;
+use space_invaders::frame::{new_frame, Drawable};
+use space_invaders::player::Player;
 use space_invaders::{frame, view};
 use std::error::Error;
-use std::time::Duration;
+use std::time::{Duration, Instant};
 use std::{io, thread};
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -45,9 +46,15 @@ fn main() -> Result<(), Box<dyn Error>> {
     });
 
     // Gameloop
+    let mut player = Player::new();
+    let mut instant = Instant::now();
+
     'gameloop: loop {
         // Init
-        let next_frame = new_frame();
+        let delta = instant.elapsed();
+        instant = Instant::now();
+
+        let mut next_frame = new_frame();
 
         // Input
         while event::poll(Duration::default())? {
@@ -57,10 +64,27 @@ fn main() -> Result<(), Box<dyn Error>> {
                         audio.play("lose");
                         break 'gameloop;
                     }
+                    KeyCode::Left | KeyCode::Char('a') => {
+                        player.move_left();
+                    }
+                    KeyCode::Right | KeyCode::Char('d') => {
+                        player.move_right();
+                    }
+                    KeyCode::Char(' ') | KeyCode::Enter => {
+                        if player.try_to_shoot() {
+                            audio.play("pew");
+                        }
+                    }
                     _ => {}
                 }
             }
         }
+
+        // Update
+        player.update(delta);
+
+        // Draw
+        player.draw(&mut next_frame);
 
         // Render
         let _ = sender.send(next_frame);
