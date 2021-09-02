@@ -5,6 +5,7 @@ use crossterm::terminal::{EnterAlternateScreen, LeaveAlternateScreen};
 use crossterm::{event, terminal, ExecutableCommand};
 use rusty_audio::Audio;
 use space_invaders::frame::{new_frame, Drawable};
+use space_invaders::invaders::Invaders;
 use space_invaders::player::Player;
 use space_invaders::{frame, view};
 use std::error::Error;
@@ -48,6 +49,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Gameloop
     let mut player = Player::new();
     let mut instant = Instant::now();
+    let mut invaders = Invaders::new();
 
     'gameloop: loop {
         // Init
@@ -82,9 +84,15 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         // Update
         player.update(delta);
+        if invaders.try_to_move(delta) {
+            audio.play("move");
+        }
 
         // Draw
-        player.draw(&mut next_frame);
+        let drawables: Vec<&dyn Drawable> = vec![&player, &invaders];
+        for drawable in drawables {
+            drawable.draw(&mut next_frame);
+        }
 
         // Render
         let _ = sender.send(next_frame);
