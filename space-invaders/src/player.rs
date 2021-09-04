@@ -1,7 +1,7 @@
 use crate::frame::{Drawable, Frame};
+use crate::invaders::Army;
 use crate::shot::Shot;
 use crate::{NUMBER_OF_COLUMNS, NUMBER_OF_ROWS};
-use std::ops::Deref;
 use std::time::Duration;
 
 pub struct Player {
@@ -45,6 +45,18 @@ impl Player {
             shot.update(delta);
         }
         self.shots.retain(|shot| !shot.is_dead())
+    }
+
+    pub fn try_to_hit_something(&mut self, army: &mut Army) -> bool {
+        let mut hit_something = false;
+        for shot in self.shots.iter_mut() {
+            if !shot.exploding && army.try_to_kill_invader_at(shot.x, shot.y) {
+                hit_something = true;
+                shot.explode();
+            }
+        }
+
+        hit_something
     }
 }
 

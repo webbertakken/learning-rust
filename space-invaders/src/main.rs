@@ -1,11 +1,9 @@
 use crossbeam::channel;
-use crossterm::cursor::{Hide, Show};
 use crossterm::event::{Event, KeyCode};
-use crossterm::terminal::{EnterAlternateScreen, LeaveAlternateScreen};
-use crossterm::{event, terminal, ExecutableCommand};
+use crossterm::{cursor, event, terminal, ExecutableCommand};
 use rusty_audio::Audio;
 use space_invaders::frame::{new_frame, Drawable};
-use space_invaders::invaders::Invaders;
+use space_invaders::invaders::Army;
 use space_invaders::player::Player;
 use space_invaders::{frame, view};
 use std::error::Error;
@@ -25,8 +23,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Terminal
     let mut stdout = io::stdout();
     terminal::enable_raw_mode()?;
-    stdout.execute(EnterAlternateScreen)?;
-    stdout.execute(Hide)?;
+    stdout.execute(terminal::EnterAlternateScreen)?;
+    stdout.execute(cursor::Hide)?;
 
     // Render loop in a separate thread
     let (sender, receiver) = channel::unbounded();
@@ -49,7 +47,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Gameloop
     let mut player = Player::new();
     let mut instant = Instant::now();
-    let mut invaders = Invaders::new();
+    let mut army = Army::new();
 
     'gameloop: loop {
         // Init
@@ -84,19 +82,34 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         // Update
         player.update(delta);
-        if invaders.try_to_move(delta) {
+        if army.try_to_move(delta) {
             audio.play("move");
+        }
+        if player.try_to_hit_something(&mut army) {
+            audio.play("explode");
         }
 
         // Draw
-        let drawables: Vec<&dyn Drawable> = vec![&player, &invaders];
+        let drawables: Vec<&dyn Drawable> = vec![&player, &army];
         for drawable in drawables {
             drawable.draw(&mut next_frame);
         }
 
         // Render
         let _ = sender.send(next_frame);
-        thread::sleep(Duration::from_millis(1))
+        thread::sleep(Duration::from_millis(1));
+
+        // Win
+        if army.is_destroyed() {
+            audio.play("win");
+            break 'gameloop;
+        }
+
+        // Lose
+        if army.has_reached_the_bottom() {
+            audio.play("lose");
+            break 'gameloop;
+        }
     }
 
     // Cleanup
@@ -104,8 +117,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     render_thread.join().unwrap();
 
     audio.wait();
-    stdout.execute(Show)?;
-    stdout.execute(LeaveAlternateScreen)?;
+    stdout.execute(cursor::Show)?;
+    stdout.execute(terminal::LeaveAlternateScreen)?;
 
     Ok(())
 }
