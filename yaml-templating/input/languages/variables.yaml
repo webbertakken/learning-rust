@@ -1,0 +1,9 @@
+variables:
+  hello:
+    nl: Hallo
+    en: Hello
+    de: Hallo
+  world:
+    nl: wereld
+    en: world
+    de: Welt

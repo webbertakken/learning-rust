@@ -1,0 +1,6 @@
+column1:
+  property1:
+    subProperty1: "Hallo {{ world }}!"
+column2:
+  property2:
+    subProperty2: "{{ hello }} world!"
