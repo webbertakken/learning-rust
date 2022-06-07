@@ -7,6 +7,6 @@ edition = "2018"
 
 [dependencies]
 anyhow = "1.0.43"
-image = "0.21.1"
+image = "0.23.12"
 num-complex = "0.2.1"
 clap = "3.0.0-beta.4"
