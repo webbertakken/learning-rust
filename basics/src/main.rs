@@ -14,6 +14,7 @@ mod m_enums;
 mod n_closures;
 mod o_iterators;
 mod p_threads;
+mod q_errors;
 
 fn main() {
     a_basic_concepts::main();
@@ -32,4 +33,5 @@ fn main() {
     n_closures::main();
     o_iterators::main();
     p_threads::main();
+    q_errors::main();
 }
