@@ -12,7 +12,8 @@ mod k_traits;
 mod l_collections;
 mod m_enums;
 mod n_closures;
-mod o_threads;
+mod o_iterators;
+mod p_threads;
 
 fn main() {
     a_basic_concepts::main();
@@ -29,5 +30,6 @@ fn main() {
     l_collections::main();
     m_enums::main();
     n_closures::main();
-    o_threads::main();
+    o_iterators::main();
+    p_threads::main();
 }

@@ -1,5 +1,6 @@
 // Silence some warnings so they don't distract from the exercise.
 #![allow(unused_variables)]
+#![allow(clippy::redundant_clone)]
 
 pub fn main() {
     println!("\nownership...");
@@ -10,6 +11,7 @@ pub fn main() {
     changing_values_correct_signature_without_using_reference();
     changing_values_using_immutable_references();
     changing_values_using_mutable_references();
+    another_move_example();
 }
 
 fn move_value_to_new_pointer() {
@@ -81,4 +83,21 @@ fn changing_values_using_mutable_references() {
         // The * gives mutable access to the variables value.
         *string = string.to_string();
     }
+}
+
+fn another_move_example() {
+    // Any owned type
+    let s = String::from("🐈");
+
+    // Optionally clone to preserve the original
+    let s2 = s.clone();
+
+    // You can move values using the move keyword, so that they are owned by the closure.
+    let f = move || println!("{}", s2);
+
+    // Compilation error: value of s2 has moved to a different variable (that inside of the closure).
+    // println!("{}", s2);
+
+    // Invoke the closure
+    f(); // prints "🐈"
 }
