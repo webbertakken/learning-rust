@@ -15,7 +15,7 @@ mod n_closures;
 mod o_iterators;
 mod p_threads;
 mod q_errors;
-mod r_threads;
+mod r_logging;
 
 fn main() {
     a_basic_concepts::main();
@@ -35,5 +35,5 @@ fn main() {
     o_iterators::main();
     p_threads::main();
     q_errors::main();
-    r_threads::main();
+    r_logging::main();
 }
