@@ -1,3 +1,4 @@
+use dotenvy::dotenv;
 use log::{error, info};
 use std::{thread, time::Duration};
 
@@ -30,8 +31,9 @@ pub mod mom {
 }
 
 fn main() {
+    dotenv().expect("Failed to load .env file");
     env_logger::init();
-    let handle = thread::spawn(|| dad::cook_spaghetti());
+    let handle = thread::spawn(dad::cook_spaghetti);
 
     mom::cook_sauce_and_set_table();
 
