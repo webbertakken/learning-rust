@@ -1,6 +1,6 @@
 use crate::frame::{Drawable, Frame};
 use crate::{NUMBER_OF_COLUMNS, NUMBER_OF_ROWS};
-use rusty_time::timer::Timer;
+use rusty_time::Timer;
 use std::cmp::max;
 use std::time::Duration;
 
@@ -41,14 +41,13 @@ impl Army {
 
         Self {
             invaders,
-            move_timer: Timer::from_millis(2000),
+            move_timer: Timer::new(Duration::from_millis(2000)),
             direction: Direction::Right,
         }
     }
 
     pub fn try_to_move(&mut self, delta: Duration) -> bool {
-        self.move_timer.update(delta);
-        if self.move_timer.ready {
+        if self.move_timer.tick(delta).finished() {
             self.move_timer.reset();
 
             let mut downwards = false;
@@ -78,8 +77,8 @@ impl Army {
             }
 
             if downwards {
-                let new_duration = max(self.move_timer.duration.as_millis() - 250, 250);
-                self.move_timer = Timer::from_millis(new_duration as u64);
+                let new_duration = max(self.move_timer.duration().as_millis() - 250, 250);
+                self.move_timer = Timer::new(Duration::from_millis(new_duration as u64));
                 for invader in self.invaders.iter_mut() {
                     invader.y += 1;
                 }
@@ -125,8 +124,7 @@ impl Army {
 impl Drawable for Army {
     fn draw(&self, frame: &mut Frame) {
         for invader in self.invaders.iter() {
-            let cycle_progress =
-                self.move_timer.time_left.as_secs_f32() / self.move_timer.duration.as_secs_f32();
+            let cycle_progress = self.move_timer.percent_left();
 
             frame[invader.x][invader.y] = if cycle_progress >= 0.5 { "x" } else { "X" }
         }
