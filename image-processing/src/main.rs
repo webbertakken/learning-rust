@@ -2,54 +2,51 @@
 // The program will run much faster using the `--release` flag.
 
 use anyhow::Context;
-use clap::{App, Arg};
+use clap::{Arg, ArgAction, Command};
 use image::{DynamicImage, GenericImageView};
 use image_processing::{parse_between, Exit};
 use std::io::{stdout, Write};
 
 fn main() {
-    let matches = App::new("Image processor")
+    let matches = Command::new("Image processor")
         .version("1.0")
         .author("Webber <webber@takken.io>")
         .about("Helps quickly change images")
         .arg(
             Arg::new("input_file")
-                .about("Sets the input file to use")
+                .help("Sets the input file to use")
                 .required(true)
                 .index(1),
         )
         .arg(
             Arg::new("output_file")
-                .about("Sets the output file, to write the result")
+                .help("Sets the output file, to write the result")
                 .required(true)
                 .index(2),
         )
         .arg(
             Arg::new("verbosity")
                 .short('v')
-                .multiple_occurrences(true)
-                .takes_value(false)
-                .about("Sets the level of verbosity"),
+                .action(ArgAction::Count)
+                .help("Sets the level of verbosity"),
         )
         .arg(
             Arg::new("blur")
                 .short('b')
                 .long("blur")
                 .value_name("blur")
-                .about("Sets the level of blur from 0 to 100")
-                .takes_value(true),
+                .help("Sets the level of blur from 0 to 100"),
         )
         .arg(
             Arg::new("fractal")
                 .short('f')
                 .long("fractal")
-                .value_name("fractal")
-                .about("Uses fractal")
-                .takes_value(false),
+                .action(ArgAction::SetTrue)
+                .help("Uses fractal"),
         )
         .get_matches();
 
-    match matches.occurrences_of("verbosity") {
+    match matches.get_count("verbosity") {
         0 => println!("Verbose mode is off"),
         1 => println!("Verbose mode in on"),
         2 => println!("Verbose mode is at maximum"),
@@ -60,7 +57,7 @@ fn main() {
     let dest_file: &str;
 
     // You can check the value provided by positional arguments, or option arguments
-    if let Some(input_file) = matches.value_of("input_file") {
+    if let Some(input_file) = matches.get_one::<String>("input_file") {
         println!("File to read: {}", input_file);
 
         image = image::open(input_file).expect("Failed to open file.");
@@ -73,7 +70,7 @@ fn main() {
         panic!("Input file must be provided.")
     }
 
-    if let Some(output_file) = matches.value_of("output_file") {
+    if let Some(output_file) = matches.get_one::<String>("output_file") {
         println!("Filename to output: {}", output_file);
         dest_file = output_file;
     } else {
@@ -83,11 +80,11 @@ fn main() {
     println!();
     println!("Processing image...");
 
-    if let Some(amount) = matches.value_of("blur") {
+    if let Some(amount) = matches.get_one::<String>("blur") {
         image = blur(image, amount)
     }
 
-    if matches.is_present("fractal") {
+    if matches.get_flag("fractal") {
         image = fractal(image);
     }
 
@@ -194,7 +191,7 @@ fn fractal(image: DynamicImage) -> DynamicImage {
     // Iterate over the coordinates and pixels of the image
     for (x, y, pixel) in new_image.as_mut_rgb8().unwrap().enumerate_pixels_mut() {
         // Use red and blue to be a pretty gradient background
-        let [red, _green, blue] = pixel.data;
+        let [red, _green, blue] = pixel.0;
 
         // Use green as the fractal foreground (here is the fractal math part)
         let cx = y as f32 * scale_x - 1.5;
@@ -213,5 +210,5 @@ fn fractal(image: DynamicImage) -> DynamicImage {
         *pixel = image::Rgb([red, green, blue]);
     }
 
-    return new_image;
+    new_image
 }
