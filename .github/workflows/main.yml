@@ -14,7 +14,7 @@ jobs:
     name: "Build & Test: Hello World"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Build
         run: cargo build --manifest-path=hello/Cargo.toml --verbose
       - name: Run tests
@@ -24,7 +24,7 @@ jobs:
     name: "Build & Test: Basics"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Build
         run: cargo build --manifest-path=basics/Cargo.toml --verbose
       - name: Run tests
