@@ -1,5 +1,6 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
 use hello::snuggle;
+use std::hint::black_box;
 
 pub fn snuggle_benchmark(c: &mut Criterion) {
     c.bench_function("snuggle 2", |bencher| {

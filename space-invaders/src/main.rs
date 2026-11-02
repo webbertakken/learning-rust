@@ -1,5 +1,5 @@
 use crossbeam::channel;
-use crossterm::event::{Event, KeyCode};
+use crossterm::event::{Event, KeyCode, KeyEventKind};
 use crossterm::{cursor, event, terminal, ExecutableCommand};
 use rusty_audio::Audio;
 use space_invaders::frame::{new_frame, Drawable};
@@ -59,6 +59,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         // Input
         while event::poll(Duration::default())? {
             if let Event::Key(key_event) = event::read()? {
+                if key_event.kind != KeyEventKind::Press {
+                    continue;
+                }
                 match key_event.code {
                     KeyCode::Esc | KeyCode::Char('q') => {
                         audio.play("lose");

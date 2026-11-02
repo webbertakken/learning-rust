@@ -2,7 +2,8 @@
 // - Speed up the implementation of sploosh(8, 9, 10) without breaking the other tests.
 // - Hint: See Cargo.toml to get you started
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 use testing::sploosh;
 
 pub fn sploosh_benchmark(c: &mut Criterion) {
